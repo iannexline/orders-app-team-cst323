@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
-    <title>Orders</title>
+    <title>User Administration</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
@@ -31,32 +31,31 @@
 </nav>
 
 <div class="container">
-    <h1 th:text="${title}"></h1>
-    <p>
-        <a class="btn btn-primary" th:href="@{/orders/newOrder}">New Item</a>
-    </p>
+    <h1>User Administration</h1>
+
+    <div class="alert alert-info" th:if="${message}" th:text="${message}">
+        Feedback message
+    </div>
+
     <table class="table table-bordered">
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Order Number</th>
-                <th>Product Name</th>
-                <th>Price</th>
-                <th>Quantity</th>
+                <th>Username</th>
+                <th>Role</th>
+                <th>Enabled</th>
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
-            <tr th:each="order : ${orders}">
-                <td th:text="${order.id}">Id</td>
-                <td th:text="${order.order_number}">Order Number</td>
-                <td th:text="${order.product_name}">Product Name</td>
-                <td th:text="${order.price}">Price</td>
-                <td th:text="${order.quantity}">Quantity</td>
+            <tr th:each="user : ${users}">
+                <td th:text="${user.id}">Id</td>
+                <td th:text="${user.username}">Username</td>
+                <td th:text="${user.role}">Role</td>
+                <td th:text="${user.enabled}">Enabled</td>
                 <td>
-                    <a class="btn btn-primary" th:href="@{/orders/editOrder/{id}(id=${order.id})}">Edit</a>
-                    <a class="btn btn-danger" th:href="@{/orders/deleteOrder/{id}(id=${order.id})}">Delete</a>
-                    <a class="btn btn-info" th:href="@{/orders/showOrder/{id}(id=${order.id})}">Show</a>
+                    <a class="btn btn-primary" th:href="@{/admin/users/edit/{id}(id=${user.id})}">Edit</a>
+                    <a class="btn btn-danger" th:href="@{/admin/users/delete/{id}(id=${user.id})}">Delete</a>
                 </td>
             </tr>
         </tbody>
